@@ -35,6 +35,7 @@
             border-radius: 10px;
             cursor: pointer;
             flex: 1 1 calc(50% - 20px);
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #ff4d4d;
@@ -45,14 +46,8 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.5s ease;
         }
-
-        .show {
-            opacity: 1;
-        }
-
         @media (min-width: 768px) {
             button {
                 flex: 1 1 calc(25% - 20px);
@@ -61,6 +56,39 @@
         .top-button {
             margin-top: 20px;
         }
+        .riddle {
+            margin-top: 40px;
+        }
+        .riddle p {
+            font-weight: bold;
+        }
+        .letter-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px auto;
+        }
+        .letter-boxes input {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            border-radius: 5px;
+            border: 2px solid #ff6f61;
+        }
+        .hidden {
+            display: none;
+        }
+        .success-message {
+            color: #27ae60;
+            font-size: 24px;
+            margin-top: 30px;
+            animation: popIn 0.5s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -68,13 +96,9 @@
         <h1>¡Feliz Cumpleaños!</h1>
         <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
-        <!-- Botón "Ana Original" -->
         <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
-
-        <!-- Imagen que se mostrará -->
         <img id="miImagen" src="" alt="Imagen sorpresa">
 
-        <!-- Contenedor de botones -->
         <div class="button-container">
             <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
             <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
@@ -88,33 +112,63 @@
             <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
             <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
         </div>
-    </div>
 
-    <!-- Botón para descargar la canción -->
-    <div style="margin-top: 30px;">
-        <a href="Ana Stumpf - Cecilia1.mp3" download>
-            <button>Descargar tu canción</button>
-        </a>
+        <div class="riddle">
+            <div class="riddle-item">
+                <p>1. Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons)</p>
+                <div class="letter-boxes" data-answer="cejas"></div>
+            </div>
+            <div class="riddle-item">
+                <p>2. Hay una que no tiene un objeto que las otras sí tienen (Ana Potter)</p>
+                <div class="letter-boxes" data-answer="celular"></div>
+            </div>
+            <div class="riddle-item">
+                <p>3. Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi)</p>
+                <div class="letter-boxes" data-answer="collar"></div>
+            </div>
+        </div>
+
+        <div id="mensajeFinal" class="hidden success-message">🎉¡Lo lograste! Acá está tu regalo final...🌟</div>
+
+        <div id="cancionContainer" class="hidden" style="margin-top: 20px;">
+            <a href="Ana Stumpf - Cecilia1.mp3" download>
+                <button>Descargar tu canción</button>
+            </a>
+        </div>
     </div>
 
     <script>
         function mostrarImagen(imagenSrc) {
             const imagen = document.getElementById("miImagen");
-
-            // Si ya hay una imagen visible, hacer fade-out primero
-            if (imagen.style.display === "block") {
-                imagen.classList.remove("show");
-                setTimeout(() => {
-                    imagen.src = imagenSrc;
-                    imagen.classList.add("show");
-                }, 300); // Esperar que termine el fade-out antes del cambio
-            } else {
-                // Si es la primera vez, mostrar directamente
+            imagen.style.opacity = 0;
+            setTimeout(() => {
                 imagen.src = imagenSrc;
                 imagen.style.display = "block";
-                setTimeout(() => {
-                    imagen.classList.add("show");
-                }, 50); // Pequeño delay para que el fade-in se active
+                imagen.style.opacity = 1;
+            }, 200);
+        }
+
+        document.querySelectorAll('.letter-boxes').forEach(container => {
+            const answer = container.dataset.answer;
+            for (let i = 0; i < answer.length; i++) {
+                const input = document.createElement('input');
+                input.maxLength = 1;
+                input.addEventListener('input', checkAll);
+                container.appendChild(input);
+            }
+        });
+
+        function checkAll() {
+            let correct = 0;
+            document.querySelectorAll('.letter-boxes').forEach(container => {
+                const answer = container.dataset.answer;
+                const inputs = container.querySelectorAll('input');
+                const userAnswer = Array.from(inputs).map(i => i.value.toLowerCase()).join('');
+                if (userAnswer === answer) correct++;
+            });
+            if (correct === 3) {
+                document.getElementById("mensajeFinal").classList.remove("hidden");
+                document.getElementById("cancionContainer").classList.remove("hidden");
             }
         }
     </script>
