@@ -100,22 +100,28 @@
     <script>
         function mostrarImagen(imagenSrc) {
             const imagen = document.getElementById("miImagen");
-
-            // Si ya hay una imagen visible, hacer fade-out primero
-            if (imagen.style.display === "block") {
-                imagen.classList.remove("show");
-                setTimeout(() => {
-                    imagen.src = imagenSrc;
-                    imagen.classList.add("show");
-                }, 300); // Esperar que termine el fade-out antes del cambio
-            } else {
-                // Si es la primera vez, mostrar directamente
+    
+            // Ocultamos la imagen actual con fade-out
+            imagen.classList.remove("show");
+    
+            // Creamos una nueva imagen temporal para cargar la próxima
+            const nuevaImagen = new Image();
+            nuevaImagen.src = imagenSrc;
+    
+            nuevaImagen.onload = () => {
+                // Cuando la nueva imagen está completamente cargada:
                 imagen.src = imagenSrc;
-                imagen.style.display = "block";
+    
+                // Aseguramos que esté visible
+                if (imagen.style.display !== "block") {
+                    imagen.style.display = "block";
+                }
+    
+                // Aplicamos el fade-in
                 setTimeout(() => {
                     imagen.classList.add("show");
-                }, 50); // Pequeño delay para que el fade-in se active
-            }
+                }, 50);
+            };
         }
     </script>
 </body>
