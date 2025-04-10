@@ -1,230 +1,205 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Regalo de Cumpleaños</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9d7e6;
-      text-align: center;
-      padding: 20px;
-      margin: 0;
-    }
-
-    h1 {
-      color: #ff6f61;
-    }
-
-    p {
-      font-size: 20px;
-      color: #333;
-    }
-
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    button {
-      background-color: #ff6f61;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      flex: 1 1 calc(50% - 20px);
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #ff4d4d;
-    }
-
-    img {
-      display: none;
-      margin: 20px auto 30px;
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    .top-button {
-      margin-top: 20px;
-    }
-
-    @media (min-width: 768px) {
-      button {
-        flex: 1 1 calc(25% - 20px);
-      }
-    }
-
-    .acertijo-container {
-      margin-top: 40px;
-    }
-
-    .acertijo {
-      margin: 20px 0;
-    }
-
-    .input-grid {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .input-grid input {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      text-align: center;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .success-animation {
-      animation: pop 0.5s ease forwards;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(1); background-color: #fff; }
-      50% { transform: scale(1.2); background-color: #c3f9b2; }
-      100% { transform: scale(1); background-color: #fff; }
-    }
-
-    .star {
-      position: fixed;
-      top: -10px;
-      width: 10px;
-      height: 10px;
-      background: gold;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo de Cumpleaños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9d7e6;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #ff6f61;
+        }
+        p {
+            font-size: 20px;
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex: 1 1 calc(50% - 20px);
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff4d4d;
+        }
+        img {
+            display: none;
+            margin: 20px auto 30px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .top-button {
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            button {
+                flex: 1 1 calc(25% - 20px);
+            }
+        }
+        .grilla {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px auto;
+        }
+        .grilla input {
+            width: 40px;
+            font-size: 20px;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .correcto {
+            animation: brillo 1s ease-in-out;
+            background-color: #c8f7c5;
+        }
+        @keyframes brillo {
+            0% { background-color: #fff; }
+            50% { background-color: #c8f7c5; }
+            100% { background-color: #fff; }
+        }
+        #estrellas {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            top: 0;
+            left: 0;
+        }
+        .estrella {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            animation: caer 2s linear forwards;
+        }
+        @keyframes caer {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div>
+        <h1>¡Feliz Cumpleaños!</h1>
+        <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
-  <h1>¡Feliz Cumpleaños!</h1>
-  <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
+        <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
+        <img id="miImagen" src="" alt="Imagen sorpresa">
 
-  <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
-  <img id="miImagen" src="" alt="Imagen sorpresa">
-
-  <div class="button-container">
-    <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
-    <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
-    <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
-    <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
-    <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
-    <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
-    <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
-    <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
-    <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
-    <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
-    <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
-  </div>
-
-  <div class="acertijo-container">
-    <div class="acertijo">
-      <p>Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons)</p>
-      <div class="input-grid" id="acertijo1"></div>
+        <div class="button-container">
+            <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
+            <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
+            <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
+            <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
+            <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
+            <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
+            <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
+            <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
+            <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
+            <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
+            <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
+        </div>
     </div>
 
-    <div class="acertijo">
-      <p>Hay una que no tiene un objeto que las otras sí tienen (Ana Potter)</p>
-      <div class="input-grid" id="acertijo2"></div>
+    <div id="juego">
+        <h2>Acertá las palabras mágicas</h2>
+        <div class="grilla" id="grilla1"></div>
+        <div class="grilla" id="grilla2"></div>
+        <div class="grilla" id="grilla3"></div>
     </div>
 
-    <div class="acertijo">
-      <p>Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi)</p>
-      <div class="input-grid" id="acertijo3"></div>
+    <div id="cancion" style="margin-top: 30px; display: none;">
+        <a href="Ana Stumpf - Cecilia1.mp3" download>
+            <button>Descargar tu canción</button>
+        </a>
     </div>
-  </div>
 
-  <div id="cancion-container" class="hidden" style="margin-top: 30px;">
-    <a href="Ana Stumpf - Cecilia1.mp3" download>
-      <button>Descargar tu canción</button>
-    </a>
-  </div>
+    <div id="estrellas"></div>
+    <audio id="audioCorrecto" src="correcto.mp3"></audio>
 
-  <audio id="sonidoAcierto" src="success.mp3"></audio>
-
-  <script>
-    function mostrarImagen(src) {
-      const imagen = document.getElementById("miImagen");
-      imagen.style.opacity = 0;
-      setTimeout(() => {
-        imagen.src = src;
-        imagen.style.display = "block";
-        imagen.style.opacity = 1;
-      }, 200);
-    }
-
-    const acertijos = [
-      { palabra: 'cejas', id: 'acertijo1', resuelto: false },
-      { palabra: 'celular', id: 'acertijo2', resuelto: false },
-      { palabra: 'collar', id: 'acertijo3', resuelto: false }
-    ];
-
-    function crearInputs() {
-      acertijos.forEach((a, index) => {
-        const container = document.getElementById(a.id);
-        for (let i = 0; i < a.palabra.length; i++) {
-          const input = document.createElement('input');
-          input.maxLength = 1;
-          input.dataset.index = i;
-          input.addEventListener('input', () => validarRespuesta(index));
-          container.appendChild(input);
+    <script>
+        function mostrarImagen(imagenSrc) {
+            const imagen = document.getElementById("miImagen");
+            imagen.style.opacity = 0;
+            setTimeout(() => {
+                imagen.src = imagenSrc;
+                imagen.style.display = "block";
+                imagen.style.opacity = 1;
+            }, 300);
         }
-      });
-    }
 
-    function validarRespuesta(index) {
-      const { palabra, id } = acertijos[index];
-      const inputs = document.getElementById(id).querySelectorAll('input');
-      const respuesta = Array.from(inputs).map(input => input.value.toLowerCase()).join('');
-      if (respuesta === palabra && !acertijos[index].resuelto) {
-        inputs.forEach(i => i.classList.add('success-animation'));
-        acertijos[index].resuelto = true;
-        verificarTodos();
-      }
-    }
+        const respuestas = ["cejas", "celular", "coyar"];
+        const grillas = ["grilla1", "grilla2", "grilla3"];
+        const acertadas = [false, false, false];
 
-    function verificarTodos() {
-      if (acertijos.every(a => a.resuelto)) {
-        document.getElementById("cancion-container").classList.remove("hidden");
-        document.getElementById("sonidoAcierto").play();
-        lluviaEstrellas();
-      }
-    }
+        grillas.forEach((id, index) => {
+            const contenedor = document.getElementById(id);
+            const palabra = respuestas[index];
+            for (let i = 0; i < palabra.length; i++) {
+                const input = document.createElement("input");
+                input.maxLength = 1;
+                input.dataset.index = i;
+                input.addEventListener("input", () => validar(index));
+                contenedor.appendChild(input);
+            }
+        });
 
-    function lluviaEstrellas() {
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.animationDuration = 1 + Math.random() * 2 + "s";
-        document.body.appendChild(star);
-        setTimeout(() => star.remove(), 3000);
-      }
-    }
+        function validar(grillaIndex) {
+            const contenedor = document.getElementById(grillas[grillaIndex]);
+            const inputs = contenedor.querySelectorAll("input");
+            const palabra = respuestas[grillaIndex];
+            let respuesta = "";
+            inputs.forEach(i => respuesta += i.value.toLowerCase());
+
+            if (respuesta === palabra) {
+                inputs.forEach(i => i.classList.add("correcto"));
+                acertadas[grillaIndex] = true;
+                document.getElementById("audioCorrecto").play();
+                lluviaEstrellas();
+            }
+
+            if (acertadas.every(a => a)) {
+                document.getElementById("cancion").style.display = "block";
+            }
+        }
+
+        function lluviaEstrellas() {
+            for (let i = 0; i < 30; i++) {
+                const estrella = document.createElement("div");
+                estrella.className = "estrella";
+                estrella.style.left = Math.random() * 100 + "vw";
+                estrella.style.top = Math.random() * -100 + "px";
+                document.getElementById("estrellas").appendChild(estrella);
+                setTimeout(() => estrella.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
