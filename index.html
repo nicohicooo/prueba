@@ -98,7 +98,7 @@
             pointer-events: none;
             z-index: 9999;
         }
-        .star, .firework {
+        .star {
             position: absolute;
             width: 10px;
             height: 10px;
@@ -106,9 +106,22 @@
             border-radius: 50%;
             animation: twinkle 2s ease-in-out forwards;
         }
+        .firework {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            animation: explode 2.5s ease-in-out forwards;
+        }
         @keyframes twinkle {
             0% { transform: scale(0); opacity: 1; }
             100% { transform: scale(2); opacity: 0; }
+        }
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(4); opacity: 1; }
+            100% { transform: scale(6); opacity: 0; }
         }
     </style>
 </head>
@@ -220,7 +233,7 @@
 
         function lanzarFuegosArtificiales() {
             const container = document.getElementById("fireworksContainer");
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const firework = document.createElement("div");
                     firework.classList.add("firework");
@@ -228,8 +241,8 @@
                     firework.style.left = Math.random() * 100 + "%";
                     firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                     container.appendChild(firework);
-                    setTimeout(() => firework.remove(), 3000);
-                }, i * 100);
+                    setTimeout(() => firework.remove(), 3500);
+                }, i * 120);
             }
         }
 
