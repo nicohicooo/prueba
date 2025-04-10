@@ -34,7 +34,7 @@
             font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
-            flex: 1 1 calc(50% - 20px); /* Dos botones por fila en móvil */
+            flex: 1 1 calc(50% - 20px);
         }
         button:hover {
             background-color: #ff4d4d;
@@ -45,20 +45,17 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
         }
 
-        /* Animación fade-in */
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-        .fade-in.show {
+        .show {
             opacity: 1;
         }
 
         @media (min-width: 768px) {
             button {
-                flex: 1 1 calc(25% - 20px); /* Cuatro botones por fila en PC */
+                flex: 1 1 calc(25% - 20px);
             }
         }
         .top-button {
@@ -71,11 +68,11 @@
         <h1>¡Feliz Cumpleaños!</h1>
         <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
-        <!-- Botón "Ana Original" arriba de la imagen -->
+        <!-- Botón "Ana Original" -->
         <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
 
         <!-- Imagen que se mostrará -->
-        <img id="miImagen" class="fade-in" src="" alt="Imagen sorpresa">
+        <img id="miImagen" src="" alt="Imagen sorpresa">
 
         <!-- Contenedor de botones -->
         <div class="button-container">
@@ -103,19 +100,22 @@
     <script>
         function mostrarImagen(imagenSrc) {
             const imagen = document.getElementById("miImagen");
-            
-            // Quitar clase anterior si la tenía
-            imagen.classList.remove("show");
 
-            // Cambiar la imagen
-            imagen.src = imagenSrc;
-            imagen.style.display = "block";
-            
-            // Forzar el reinicio de animación
-            void imagen.offsetWidth;
-            
-            // Aplicar la clase con fade-in
-            imagen.classList.add("fade-in", "show");
+            // Si ya hay una imagen visible, hacer fade-out primero
+            if (imagen.style.display === "block") {
+                imagen.classList.remove("show");
+                setTimeout(() => {
+                    imagen.src = imagenSrc;
+                    imagen.classList.add("show");
+                }, 300); // Esperar que termine el fade-out antes del cambio
+            } else {
+                // Si es la primera vez, mostrar directamente
+                imagen.src = imagenSrc;
+                imagen.style.display = "block";
+                setTimeout(() => {
+                    imagen.classList.add("show");
+                }, 50); // Pequeño delay para que el fade-in se active
+            }
         }
     </script>
 </body>
