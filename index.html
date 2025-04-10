@@ -1,265 +1,218 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Regalo de Cumpleaños</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9d7e6;
-      text-align: center;
-      padding: 20px;
-      margin: 0;
-      overflow-x: hidden;
-    }
-
-    h1 {
-      color: #ff6f61;
-    }
-
-    p {
-      font-size: 20px;
-      color: #333;
-    }
-
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    button {
-      background-color: #ff6f61;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      flex: 1 1 calc(50% - 20px);
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #ff4d4d;
-    }
-
-    img {
-      display: none;
-      margin: 20px auto 30px;
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: opacity 0.5s ease;
-    }
-
-    @media (min-width: 768px) {
-      button {
-        flex: 1 1 calc(25% - 20px);
-      }
-    }
-
-    .top-button {
-      margin-top: 20px;
-    }
-
-    .riddle {
-      margin-top: 40px;
-    }
-
-    .riddle p {
-      font-weight: bold;
-    }
-
-    .letter-boxes {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 10px auto;
-    }
-
-    .letter-boxes input {
-      width: 40px;
-      height: 40px;
-      font-size: 24px;
-      text-align: center;
-      border-radius: 5px;
-      border: 2px solid #ff6f61;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .success-message {
-      color: #27ae60;
-      font-size: 24px;
-      margin-top: 30px;
-      animation: popIn 0.5s ease;
-    }
-
-    @keyframes popIn {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* 🎇 Estrellas animadas */
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1000;
-    }
-
-    .star {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: gold;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: fall 1.5s linear forwards;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10px) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) scale(0.2);
-        opacity: 0;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo de Cumpleaños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9d7e6;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #ff6f61;
+        }
+        p {
+            font-size: 20px;
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex: 1 1 calc(50% - 20px);
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff4d4d;
+        }
+        img {
+            display: none;
+            margin: 20px auto 30px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 0.5s ease;
+        }
+        @media (min-width: 768px) {
+            button {
+                flex: 1 1 calc(25% - 20px);
+            }
+        }
+        .top-button {
+            margin-top: 20px;
+        }
+        .riddle {
+            margin-top: 40px;
+        }
+        .riddle p {
+            font-weight: bold;
+        }
+        .letter-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px auto;
+        }
+        .letter-boxes input {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            border-radius: 5px;
+            border: 2px solid #ff6f61;
+        }
+        .hidden {
+            display: none;
+        }
+        .success-message {
+            color: #27ae60;
+            font-size: 24px;
+            margin-top: 30px;
+            animation: popIn 0.5s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .star {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: yellow;
+            border-radius: 50%;
+            animation: twinkle 1s ease-in-out forwards;
+        }
+        @keyframes twinkle {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-  <div>
-    <h1>¡Feliz Cumpleaños!</h1>
-    <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
+    <audio id="successSound" src="acierto.mp3"></audio>
 
-    <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
-    <img id="miImagen" src="" alt="Imagen sorpresa" />
+    <div>
+        <h1>¡Feliz Cumpleaños!</h1>
+        <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
-    <div class="button-container">
-      <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
-      <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
-      <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
-      <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
-      <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
-      <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
-      <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
-      <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
-      <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
-      <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
-      <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
+        <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
+        <img id="miImagen" src="" alt="Imagen sorpresa">
+
+        <div class="button-container">
+            <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
+            <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
+            <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
+            <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
+            <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
+            <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
+            <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
+            <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
+            <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
+            <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
+            <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
+        </div>
+
+        <div class="riddle">
+            <div class="riddle-item">
+                <p>1. Hay una parte del cuerpo que una no tiene, pero el resto sí</p>
+                <div class="letter-boxes" data-answer="cejas"></div>
+            </div>
+            <div class="riddle-item">
+                <p>2. Hay una que no tiene un objeto que las otras sí tienen</p>
+                <div class="letter-boxes" data-answer="celular"></div>
+            </div>
+            <div class="riddle-item">
+                <p>3. Hay una que no tiene una cosa muy característica tuya que las otras sí tienen</p>
+                <div class="letter-boxes" data-answer="collar"></div>
+            </div>
+        </div>
+
+        <div id="mensajeFinal" class="hidden success-message">🎉¡Lo lograste! Acá está tu regalo final...🌟</div>
+
+        <div id="cancionContainer" class="hidden" style="margin-top: 20px;">
+            <a href="Ana Stumpf - Cecilia1.mp3" download>
+                <button>Descargar tu canción</button>
+            </a>
+        </div>
+
+        <div id="starsContainer" class="stars"></div>
     </div>
 
-    <div class="riddle">
-      <div class="riddle-item">
-        <p>1. Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons)</p>
-        <div class="letter-boxes" data-answer="cejas"></div>
-      </div>
-      <div class="riddle-item">
-        <p>2. Hay una que no tiene un objeto que las otras sí tienen (Ana Potter)</p>
-        <div class="letter-boxes" data-answer="celular"></div>
-      </div>
-      <div class="riddle-item">
-        <p>3. Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi)</p>
-        <div class="letter-boxes" data-answer="collar"></div>
-      </div>
-    </div>
+    <script>
+        function mostrarImagen(imagenSrc) {
+            const imagen = document.getElementById("miImagen");
+            imagen.style.opacity = 0;
+            setTimeout(() => {
+                imagen.src = imagenSrc;
+                imagen.style.display = "block";
+                imagen.style.opacity = 1;
+            }, 200);
+        }
 
-    <div id="mensajeFinal" class="hidden success-message">🎉¡Lo lograste! Acá está tu regalo final...🌟</div>
+        document.querySelectorAll('.letter-boxes').forEach(container => {
+            const answer = container.dataset.answer;
+            for (let i = 0; i < answer.length; i++) {
+                const input = document.createElement('input');
+                input.maxLength = 1;
+                input.addEventListener('input', checkAll);
+                container.appendChild(input);
+            }
+        });
 
-    <div id="cancionContainer" class="hidden" style="margin-top: 20px;">
-      <a href="Ana Stumpf - Cecilia1.mp3" download>
-        <button>Descargar tu canción</button>
-      </a>
-    </div>
+        let yaMostrado = false;
 
-    <!-- Estrellas y música -->
-    <div class="stars" id="starsContainer"></div>
-    <audio id="celebrationSound" src="celebracion.mp3" preload="auto"></audio>
-  </div>
+        function checkAll() {
+            let correct = 0;
+            document.querySelectorAll('.letter-boxes').forEach(container => {
+                const answer = container.dataset.answer;
+                const inputs = container.querySelectorAll('input');
+                const userAnswer = Array.from(inputs).map(i => i.value.toLowerCase()).join('');
+                if (userAnswer === answer) correct++;
+            });
+            if (correct === 3 && !yaMostrado) {
+                yaMostrado = true;
+                document.getElementById("mensajeFinal").classList.remove("hidden");
+                document.getElementById("cancionContainer").classList.remove("hidden");
+                document.getElementById("successSound").play();
+                crearEstrellas();
+            }
+        }
 
-  <script>
-    function mostrarImagen(imagenSrc) {
-      const imagen = document.getElementById("miImagen");
-      imagen.style.opacity = 0;
-      setTimeout(() => {
-        imagen.src = imagenSrc;
-        imagen.style.display = "block";
-        imagen.style.opacity = 1;
-      }, 200);
-    }
-
-    document.querySelectorAll(".letter-boxes").forEach((container) => {
-      const answer = container.dataset.answer;
-      for (let i = 0; i < answer.length; i++) {
-        const input = document.createElement("input");
-        input.maxLength = 1;
-        input.addEventListener("input", checkAll);
-        container.appendChild(input);
-      }
-    });
-
-    let yaGano = false;
-
-    function checkAll() {
-      if (yaGano) return;
-      let correct = 0;
-      document.querySelectorAll(".letter-boxes").forEach((container) => {
-        const answer = container.dataset.answer;
-        const inputs = container.querySelectorAll("input");
-        const userAnswer = Array.from(inputs)
-          .map((i) => i.value.toLowerCase())
-          .join("");
-        if (userAnswer === answer) correct++;
-      });
-
-      if (correct === 3) {
-        yaGano = true;
-        document.getElementById("mensajeFinal").classList.remove("hidden");
-        document.getElementById("cancionContainer").classList.remove("hidden");
-        reproducirCelebracion();
-        lanzarEstrellas();
-      }
-    }
-
-    function reproducirCelebracion() {
-      const audio = document.getElementById("celebrationSound");
-      audio.play();
-    }
-
-    function lanzarEstrellas() {
-      const container = document.getElementById("starsContainer");
-      for (let i = 0; i < 80; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.top = Math.random() * -100 + "px";
-        star.style.animationDelay = Math.random() + "s";
-        container.appendChild(star);
-
-        setTimeout(() => {
-          star.remove();
-        }, 2000);
-      }
-    }
-  </script>
+        function crearEstrellas() {
+            const container = document.getElementById("starsContainer");
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                star.style.top = Math.random() * 100 + "%";
+                star.style.left = Math.random() * 100 + "%";
+                container.appendChild(star);
+                setTimeout(() => star.remove(), 1000);
+            }
+        }
+    </script>
 </body>
 </html>
