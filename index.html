@@ -109,11 +109,11 @@
 
   <!-- Juego de acertijos -->
   <div class="riddle">
-    <p>Hay una parte del cuerpo que una no tiene, pero el resto sí</p>
+    <p>Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons) <strong>(5 letras)</strong></p>
     <input id="r1" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
-    <p>Hay una que no tiene un objeto que las otras sí tienen</p>
+    <p>Hay una que no tiene un objeto que las otras sí tienen (Ana Potter) <strong>(7 letras)</strong></p>
     <input id="r2" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
-    <p>Hay una que no tiene una cosa muy característica tuya que las otras sí tienen</p>
+    <p>Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi) <strong>(6 letras)</strong></p>
     <input id="r3" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
   </div>
 
@@ -124,9 +124,22 @@
     </a>
   </div>
 
-  <audio id="successSound" src="https://www.myinstants.com/media/sounds/success-fanfare-trumpets.mp3"></audio>
+  <!-- Audio -->
+  <audio id="successSound" preload="auto">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_130369bfa3.mp3" type="audio/mp3" />
+  </audio>
 
   <script>
+    let sonidoListo = false;
+
+    // Primer interacción permite activar audio
+    document.body.addEventListener('click', () => {
+      if (!sonidoListo) {
+        document.getElementById('successSound').play().catch(() => {});
+        sonidoListo = true;
+      }
+    }, { once: true });
+
     function mostrarImagen(imagenSrc) {
       const imagen = document.getElementById("miImagen");
       imagen.style.opacity = 0;
