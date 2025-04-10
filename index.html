@@ -12,13 +12,16 @@
       padding: 20px;
       margin: 0;
     }
+
     h1 {
       color: #ff6f61;
     }
+
     p {
       font-size: 20px;
       color: #333;
     }
+
     .button-container {
       display: flex;
       flex-wrap: wrap;
@@ -26,6 +29,7 @@
       gap: 10px;
       margin-top: 20px;
     }
+
     button {
       background-color: #ff6f61;
       color: white;
@@ -35,49 +39,81 @@
       border-radius: 10px;
       cursor: pointer;
       flex: 1 1 calc(50% - 20px);
+      transition: background-color 0.3s;
     }
+
     button:hover {
       background-color: #ff4d4d;
     }
+
     img {
       display: none;
       margin: 20px auto 30px;
       max-width: 100%;
       height: auto;
       border-radius: 10px;
+      transition: opacity 0.5s ease-in-out;
     }
+
+    .top-button {
+      margin-top: 20px;
+    }
+
     @media (min-width: 768px) {
       button {
         flex: 1 1 calc(25% - 20px);
       }
     }
-    .top-button {
-      margin-top: 20px;
+
+    .acertijo-container {
+      margin-top: 40px;
     }
-    .riddle {
-      margin: 30px auto;
-      max-width: 400px;
+
+    .acertijo {
+      margin: 20px 0;
     }
-    .riddle input {
-      padding: 10px;
-      font-size: 16px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+
+    .input-grid {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-top: 10px;
     }
+
+    .input-grid input {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      text-align: center;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
     .hidden {
       display: none;
     }
+
+    .success-animation {
+      animation: pop 0.5s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); background-color: #fff; }
+      50% { transform: scale(1.2); background-color: #c3f9b2; }
+      100% { transform: scale(1); background-color: #fff; }
+    }
+
     .star {
       position: fixed;
+      top: -10px;
       width: 10px;
       height: 10px;
       background: gold;
       border-radius: 50%;
-      animation: fall 1.5s ease-out forwards;
-      z-index: 9999;
+      pointer-events: none;
+      animation: fall linear forwards;
     }
+
     @keyframes fall {
       to {
         transform: translateY(100vh) rotate(360deg);
@@ -87,11 +123,12 @@
   </style>
 </head>
 <body>
+
   <h1>¡Feliz Cumpleaños!</h1>
   <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
   <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
-  <img id="miImagen" src="" alt="Imagen sorpresa" />
+  <img id="miImagen" src="" alt="Imagen sorpresa">
 
   <div class="button-container">
     <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
@@ -107,72 +144,87 @@
     <button onclick="mostrarImagen('foto12.png')">Ana Disney</button>
   </div>
 
-  <!-- Juego de acertijos -->
-  <div class="riddle">
-    <p>Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons) <strong>(5 letras)</strong></p>
-    <input id="r1" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
-    <p>Hay una que no tiene un objeto que las otras sí tienen (Ana Potter) <strong>(7 letras)</strong></p>
-    <input id="r2" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
-    <p>Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi) <strong>(6 letras)</strong></p>
-    <input id="r3" placeholder="¿Cuál es?" oninput="verificarRespuestas()" />
+  <div class="acertijo-container">
+    <div class="acertijo">
+      <p>Hay una parte del cuerpo que una no tiene, pero el resto sí (Ana Simpsons)</p>
+      <div class="input-grid" id="acertijo1"></div>
+    </div>
+
+    <div class="acertijo">
+      <p>Hay una que no tiene un objeto que las otras sí tienen (Ana Potter)</p>
+      <div class="input-grid" id="acertijo2"></div>
+    </div>
+
+    <div class="acertijo">
+      <p>Hay una que no tiene una cosa muy característica tuya que las otras sí tienen (Super Stumpfi)</p>
+      <div class="input-grid" id="acertijo3"></div>
+    </div>
   </div>
 
-  <!-- Botón oculto hasta que gane -->
-  <div id="cancionDiv" class="hidden" style="margin-top: 30px;">
+  <div id="cancion-container" class="hidden" style="margin-top: 30px;">
     <a href="Ana Stumpf - Cecilia1.mp3" download>
-      <button>Descargar tu canción 💖</button>
+      <button>Descargar tu canción</button>
     </a>
   </div>
 
-  <!-- Audio -->
-  <audio id="successSound" preload="auto">
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_130369bfa3.mp3" type="audio/mp3" />
-  </audio>
+  <audio id="sonidoAcierto" src="success.mp3"></audio>
 
   <script>
-    let sonidoListo = false;
-
-    // Primer interacción permite activar audio
-    document.body.addEventListener('click', () => {
-      if (!sonidoListo) {
-        document.getElementById('successSound').play().catch(() => {});
-        sonidoListo = true;
-      }
-    }, { once: true });
-
-    function mostrarImagen(imagenSrc) {
+    function mostrarImagen(src) {
       const imagen = document.getElementById("miImagen");
       imagen.style.opacity = 0;
       setTimeout(() => {
-        imagen.src = imagenSrc;
+        imagen.src = src;
         imagen.style.display = "block";
         imagen.style.opacity = 1;
       }, 200);
     }
 
-    function verificarRespuestas() {
-      const r1 = document.getElementById("r1").value.trim().toLowerCase();
-      const r2 = document.getElementById("r2").value.trim().toLowerCase();
-      const r3 = document.getElementById("r3").value.trim().toLowerCase();
-      const correctas = r1 === "cejas" && r2 === "celular" && r3 === "collar";
-      if (correctas) {
-        document.getElementById("cancionDiv").classList.remove("hidden");
-        reproducirEstrellas();
-        document.getElementById("successSound").play();
+    const acertijos = [
+      { palabra: 'cejas', id: 'acertijo1', resuelto: false },
+      { palabra: 'celular', id: 'acertijo2', resuelto: false },
+      { palabra: 'collar', id: 'acertijo3', resuelto: false }
+    ];
+
+    function crearInputs() {
+      acertijos.forEach((a, index) => {
+        const container = document.getElementById(a.id);
+        for (let i = 0; i < a.palabra.length; i++) {
+          const input = document.createElement('input');
+          input.maxLength = 1;
+          input.dataset.index = i;
+          input.addEventListener('input', () => validarRespuesta(index));
+          container.appendChild(input);
+        }
+      });
+    }
+
+    function validarRespuesta(index) {
+      const { palabra, id } = acertijos[index];
+      const inputs = document.getElementById(id).querySelectorAll('input');
+      const respuesta = Array.from(inputs).map(input => input.value.toLowerCase()).join('');
+      if (respuesta === palabra && !acertijos[index].resuelto) {
+        inputs.forEach(i => i.classList.add('success-animation'));
+        acertijos[index].resuelto = true;
+        verificarTodos();
       }
     }
 
-    function reproducirEstrellas() {
-      for (let i = 0; i < 30; i++) {
-        const estrella = document.createElement("div");
-        estrella.classList.add("star");
-        estrella.style.left = Math.random() * 100 + "vw";
-        estrella.style.top = "-10px";
-        estrella.style.animationDuration = (1 + Math.random() * 1) + "s";
-        document.body.appendChild(estrella);
-        setTimeout(() => estrella.remove(), 2000);
+    function verificarTodos() {
+      if (acertijos.every(a => a.resuelto)) {
+        document.getElementById("cancion-container").classList.remove("hidden");
+        document.getElementById("sonidoAcierto").play();
+        lluviaEstrellas();
       }
     }
-  </script>
-</body>
-</html>
+
+    function lluviaEstrellas() {
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.animationDuration = 1 + Math.random() * 2 + "s";
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 3000);
+      }
+    }
