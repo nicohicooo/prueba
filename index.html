@@ -46,6 +46,16 @@
             height: auto;
             border-radius: 10px;
         }
+
+        /* Animación fade-in */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .fade-in.show {
+            opacity: 1;
+        }
+
         @media (min-width: 768px) {
             button {
                 flex: 1 1 calc(25% - 20px); /* Cuatro botones por fila en PC */
@@ -65,7 +75,7 @@
         <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
 
         <!-- Imagen que se mostrará -->
-        <img id="miImagen" src="" alt="Imagen sorpresa">
+        <img id="miImagen" class="fade-in" src="" alt="Imagen sorpresa">
 
         <!-- Contenedor de botones -->
         <div class="button-container">
@@ -93,8 +103,19 @@
     <script>
         function mostrarImagen(imagenSrc) {
             const imagen = document.getElementById("miImagen");
+            
+            // Quitar clase anterior si la tenía
+            imagen.classList.remove("show");
+
+            // Cambiar la imagen
             imagen.src = imagenSrc;
             imagen.style.display = "block";
+            
+            // Forzar el reinicio de animación
+            void imagen.offsetWidth;
+            
+            // Aplicar la clase con fade-in
+            imagen.classList.add("fade-in", "show");
         }
     </script>
 </body>
