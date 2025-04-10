@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños!</title>
+    <title>¡Feliz Cumpleaños Amada!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,7 +98,7 @@
             pointer-events: none;
             z-index: 9999;
         }
-        .star {
+        .star, .firework {
             position: absolute;
             width: 10px;
             height: 10px;
@@ -106,22 +106,23 @@
             border-radius: 50%;
             animation: twinkle 2s ease-in-out forwards;
         }
-        .firework {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: red;
-            border-radius: 50%;
-            animation: explode 2.5s ease-in-out forwards;
-        }
         @keyframes twinkle {
             0% { transform: scale(0); opacity: 1; }
             100% { transform: scale(2); opacity: 0; }
         }
-        @keyframes explode {
-            0% { transform: scale(0); opacity: 1; }
-            50% { transform: scale(4); opacity: 1; }
-            100% { transform: scale(6); opacity: 0; }
+        .download-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #27ae60;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .download-link:hover {
+            background-color: #1e874b;
         }
     </style>
 </head>
@@ -167,11 +168,7 @@
         <div id="mensajeFinal" class="hidden success-message">🎉¡Lo lograste! Acá está tu regalo final...🌟</div>
 
         <div id="cancionContainer" class="hidden" style="margin-top: 20px;">
-            <button onclick="mostrarCarta()">Ver tu carta animada</button>
-        </div>
-
-        <div id="cartaContainer" class="hidden" style="margin-top: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            <iframe width="100%" height="450" src="https://www.youtube.com/embed/LpRTHLDpnq4?si=wR9N2bZw3xK8d93x" frameborder="0" allowfullscreen></iframe>
+            <a class="download-link" href="Ana Stumpf - Cecilia.mp3" download>Descargar tu canción</a>
         </div>
 
         <div id="starsContainer" class="stars"></div>
@@ -233,7 +230,7 @@
 
         function lanzarFuegosArtificiales() {
             const container = document.getElementById("fireworksContainer");
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const firework = document.createElement("div");
                     firework.classList.add("firework");
@@ -241,13 +238,9 @@
                     firework.style.left = Math.random() * 100 + "%";
                     firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                     container.appendChild(firework);
-                    setTimeout(() => firework.remove(), 3500);
-                }, i * 120);
+                    setTimeout(() => firework.remove(), 3000);
+                }, i * 100);
             }
-        }
-
-        function mostrarCarta() {
-            document.getElementById("cartaContainer").classList.remove("hidden");
         }
     </script>
 </body>
