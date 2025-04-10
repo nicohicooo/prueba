@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             background-color: #f9d7e6;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             margin: 0;
         }
         h1 {
@@ -19,6 +19,13 @@
             font-size: 20px;
             color: #333;
         }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
         button {
             background-color: #ff6f61;
             color: white;
@@ -27,7 +34,7 @@
             font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
-            margin: 10px;
+            flex: 1 1 calc(50% - 20px); /* Dos botones por fila en móvil */
         }
         button:hover {
             background-color: #ff4d4d;
@@ -39,33 +46,35 @@
             height: auto;
             border-radius: 10px;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        @media (min-width: 768px) {
+            button {
+                flex: 1 1 calc(25% - 20px); /* Cuatro botones por fila en PC */
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div>
         <h1>¡Feliz Cumpleaños!</h1>
         <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
         <!-- Imagen que se mostrará -->
         <img id="miImagen" src="" alt="Imagen sorpresa">
 
-        <!-- Botones para mostrar imágenes -->
-        <button onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
-        <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
-        <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
-        <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
-        <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
-        <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
-        <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
-        <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
-        <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
-        <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
-        <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
+        <!-- Contenedor de botones -->
+        <div class="button-container">
+            <button onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
+            <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
+            <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
+            <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
+            <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
+            <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
+            <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
+            <button onclick="mostrarImagen('foto8.jpg')">Ana Chijiro</button>
+            <button onclick="mostrarImagen('foto9.jpg.jpg')">Ana Lego</button>
+            <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
+            <button onclick="mostrarImagen('foto11.jpg')">Super Stumpfi</button>
+        </div>
     </div>
 
     <!-- Botón para descargar la canción -->
