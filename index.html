@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regalo de Cumpleaños</title>
+    <title>¡Feliz Cumpleaños Amada!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,7 +90,7 @@
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-        .stars {
+        .stars, .fireworks {
             position: fixed;
             top: 0; left: 0;
             width: 100%;
@@ -98,19 +98,17 @@
             pointer-events: none;
             z-index: 9999;
         }
-        .star {
+        .star, .firework {
             position: absolute;
             width: 10px;
             height: 10px;
             background: yellow;
             border-radius: 50%;
-            box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.8);
-            animation: twinkle 3s ease-in-out forwards;
+            animation: twinkle 2s ease-in-out forwards;
         }
         @keyframes twinkle {
             0% { transform: scale(0); opacity: 1; }
-            50% { transform: scale(3); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(2); opacity: 0; }
         }
     </style>
 </head>
@@ -118,7 +116,7 @@
     <audio id="successSound" src="acierto.mp3"></audio>
 
     <div>
-        <h1>¡Feliz Cumpleaños!</h1>
+        <h1>¡Feliz Cumpleaños Amada!</h1>
         <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
 
         <button class="top-button" onclick="mostrarImagen('foto.jpg.jpg')">Ana Original</button>
@@ -156,12 +154,15 @@
         <div id="mensajeFinal" class="hidden success-message">🎉¡Lo lograste! Acá está tu regalo final...🌟</div>
 
         <div id="cancionContainer" class="hidden" style="margin-top: 20px;">
-            <a href="Ana Stumpf - Cecilia1.mp3" download>
-                <button>Descargar tu canción</button>
-            </a>
+            <button onclick="mostrarCarta()">Ver tu carta animada</button>
+        </div>
+
+        <div id="cartaContainer" class="hidden" style="margin-top: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <iframe width="100%" height="450" src="https://www.youtube.com/embed/LpRTHLDpnq4?si=wR9N2bZw3xK8d93x" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div id="starsContainer" class="stars"></div>
+        <div id="fireworksContainer" class="fireworks"></div>
     </div>
 
     <script>
@@ -201,12 +202,13 @@
                 document.getElementById("cancionContainer").classList.remove("hidden");
                 document.getElementById("successSound").play();
                 crearEstrellas();
+                lanzarFuegosArtificiales();
             }
         }
 
         function crearEstrellas() {
             const container = document.getElementById("starsContainer");
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 50; i++) {
                 const star = document.createElement("div");
                 star.classList.add("star");
                 star.style.top = Math.random() * 100 + "%";
@@ -214,6 +216,25 @@
                 container.appendChild(star);
                 setTimeout(() => star.remove(), 3000);
             }
+        }
+
+        function lanzarFuegosArtificiales() {
+            const container = document.getElementById("fireworksContainer");
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement("div");
+                    firework.classList.add("firework");
+                    firework.style.top = Math.random() * 100 + "%";
+                    firework.style.left = Math.random() * 100 + "%";
+                    firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    container.appendChild(firework);
+                    setTimeout(() => firework.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function mostrarCarta() {
+            document.getElementById("cartaContainer").classList.remove("hidden");
         }
     </script>
 </body>
