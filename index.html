@@ -26,18 +26,53 @@
             font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 10px;
         }
         button:hover {
             background-color: #ff4d4d;
+        }
+        img {
+            display: none;
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <h1>¡Feliz Cumpleaños!</h1>
-    <p>Este es un pequeño regalo para vos. Haz clic en el botón para descargar "Tu Canción".</p>
-    <a href="Ana Stumpf - Cecilia1.mp3" download>
-        <button>Descargar tu canción</button>
-    </a>
+    <p>Este es un pequeño regalo para vos. Aprendí a diseñar una página para darte una linda sorpresa, ¡Divertite apretando todos los botones!</p>
+
+    <!-- Botones para mostrar imágenes -->
+    <button onclick="mostrarImagen('foto.jpg')">Ana Original</button>
+    <button onclick="mostrarImagen('foto2.jpg.png')">Ana Pixar</button>
+    <button onclick="mostrarImagen('foto3.jpg.png')">Ana Peach</button>
+    <button onclick="mostrarImagen('foto4.jpg.png')">Ana Pop Art</button>
+    <button onclick="mostrarImagen('foto5.jpg.png')">Ana Simpsons</button>
+    <button onclick="mostrarImagen('foto6.jpg.png')">Ana Pokemon</button>
+    <button onclick="mostrarImagen('foto7.jpg.png')">Ana Potter</button>
+    <button onclick="mostrarImagen('foto8.jpg.png')">Ana Chijiro</button>
+    <button onclick="mostrarImagen('foto9.jpg.png')">Ana Lego</button>
+    <button onclick="mostrarImagen('foto10.jpg.png')">Ana Animé</button>
+    <button onclick="mostrarImagen('foto11.jpg.png')">Super Stumpfi</button>
+
+    <!-- Imagen que se mostrará -->
+    <img id="miImagen" src="" alt="Imagen sorpresa">
+
+    <!-- Botón para descargar la canción -->
+    <div style="margin-top: 30px;">
+        <a href="Ana Stumpf - Cecilia1.mp3" download>
+            <button>Descargar tu canción</button>
+        </a>
+    </div>
+
+    <script>
+        function mostrarImagen(imagenSrc) {
+            const imagen = document.getElementById("miImagen");
+            imagen.src = imagenSrc;
+            imagen.style.display = "block";
+        }
+    </script>
 </body>
 </html>
