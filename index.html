@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,20 +36,8 @@
 <body>
     <h1>¡Feliz Cumpleaños!</h1>
     <p>Este es un pequeño regalo para ti. Haz clic en el botón para descargar "Tu Canción".</p>
-    <button onclick="descargarCancion()">Descargar Tu Canción</button>
-
-    <script>
-        function descargarCancion() {
-            // URL de ejemplo de una canción (reemplaza con tu propia canción si es necesario)
-            const urlCancion = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-            const enlace = document.createElement('a');
-            enlace.href = urlCancion;
-            enlace.download = 'tu_cancion.mp3'; // Nombre del archivo al descargar
-            document.body.appendChild(enlace);
-            enlace.click();
-            document.body.removeChild(enlace);
-        }
-    </script>
+    <a href="Ana Stumpf - Cecilia.mp3" download>
+        <button>Descargar MP3</button>
+    </a>
 </body>
 </html>
-```
