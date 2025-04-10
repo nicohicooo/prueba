@@ -1,0 +1,56 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo de Cumpleaños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9d7e6;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff6f61;
+        }
+        p {
+            font-size: 20px;
+            color: #333;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Feliz Cumpleaños!</h1>
+    <p>Este es un pequeño regalo para ti. Haz clic en el botón para descargar "Tu Canción".</p>
+    <button onclick="descargarCancion()">Descargar Tu Canción</button>
+
+    <script>
+        function descargarCancion() {
+            // URL de ejemplo de una canción (reemplaza con tu propia canción si es necesario)
+            const urlCancion = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+            const enlace = document.createElement('a');
+            enlace.href = urlCancion;
+            enlace.download = 'tu_cancion.mp3'; // Nombre del archivo al descargar
+            document.body.appendChild(enlace);
+            enlace.click();
+            document.body.removeChild(enlace);
+        }
+    </script>
+</body>
+</html>
+```
